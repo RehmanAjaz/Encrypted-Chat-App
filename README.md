@@ -1,162 +1,157 @@
-Encrypted Chat Application 🔐💬
+# 🔐 Encrypted Chat Application
 
-A secure client-server chat application built using Python, TCP Socket Programming, and AES Encryption.
-This project demonstrates how encrypted communication can be implemented to protect messages from interception during transmission.
+A secure client-server chat application built with **Python**, **TCP Socket Programming**, and **AES Encryption** (via Fernet). Messages are encrypted before transmission, ensuring confidentiality even if intercepted on the network. A **Tkinter GUI** provides a clean, real-time messaging interface.
 
-The application includes a graphical user interface (GUI) built with Tkinter, allowing users to send and receive encrypted messages in real time.
+---
 
-Project Overview
+## 📌 Project Overview
 
-This project implements a secure messaging system where:
+This project demonstrates secure communication using cryptography and socket programming. The core workflow is:
 
-Messages are encrypted before sending
+1. Server starts and listens on a specified port
+2. Clients connect to the server
+3. Client encrypts the message using an AES (Fernet) key
+4. Encrypted message is sent over TCP to the server
+5. Server decrypts and displays the message
+6. Server broadcasts the decrypted message to all connected clients
 
-The server receives encrypted data
+```
+Client 1 ──┐
+Client 2 ──┼──▶  Server  ──▶  Broadcast to All Clients
+Client 3 ──┘
+```
 
-Messages are decrypted and displayed
+---
 
-Multiple clients can communicate with the server simultaneously
+## ✨ Features
 
-The goal of this project is to demonstrate secure communication using cryptography and socket programming.
+- 🔒 AES-based encryption using the `cryptography` (Fernet) library
+- 🌐 TCP socket communication
+- 🖥️ Client-Server architecture
+- 👥 Multi-client support via threading
+- 🖼️ Tkinter GUI with encrypted and decrypted message display
+- ⏱️ Real-time messaging with message timestamps
 
-Features
+---
 
-AES-based encryption using cryptography library
+## 🛠️ Technologies Used
 
-TCP socket communication
+| Technology | Purpose |
+|---|---|
+| Python | Core programming language |
+| Socket | TCP network communication |
+| Threading | Handle multiple simultaneous clients |
+| Cryptography (Fernet) | AES-based symmetric encryption |
+| Tkinter | Graphical user interface |
+| Datetime | Message timestamps |
 
-Client-Server architecture
+---
 
-Multi-client support using threading
+## 📁 Project Structure
 
-Tkinter GUI interface
-
-Encrypted and decrypted message display
-
-Real-time messaging
-
-Message timestamp support
-
-Technologies Used
-Technology	Purpose
-Python	Programming language
-Socket	Network communication
-Threading	Handle multiple clients
-Cryptography (Fernet)	AES encryption
-Tkinter	GUI interface
-Datetime	Message timestamps
-System Architecture
-Client 1  ----\
-               \
-Client 2  ------->  Server  ----> Broadcast Messages
-               /
-Client 3  ----/
-
-Workflow:
-
-Server starts and listens on a specific port
-
-Clients connect to the server
-
-Client encrypts message using AES key
-
-Encrypted message is sent to the server
-
-Server decrypts and displays the message
-
-Server broadcasts the message to other clients
-
-Installation
-1 Install Python
-
-Download Python from:
-
-https://www.python.org/downloads/
-
-2 Install Required Library
-
-Run the following command:
-
-pip install cryptography
-Running the Application
-Step 1: Start the Server
-python server.py
-
-Server will start listening for incoming client connections.
-
-Step 2: Start the Client
-
-Open another terminal and run:
-
-python client.py
-
-You can run multiple clients to simulate multiple users.
-
-Example Output
-
-Server receives encrypted message:
-
-Encrypted:
-b'gAAAAABl...'
-
-Server decrypts message:
-
-[14:32:10] Client: Hello Server
-Project Structure
-Encrypted-Chat-App
+```
+Encrypted-Chat-App/
 │
-├── server.py
-├── client.py
-├── README.md
-└── screenshots
-Security Implementation
+├── server.py        # Server-side logic (accept, decrypt, broadcast)
+├── client.py        # Client-side GUI and encryption logic
+├── README.md        # Project documentation
+└── screenshots/     # UI screenshots (optional)
+```
 
-This project uses Fernet encryption from the cryptography library, which is based on AES (Advanced Encryption Standard).
+---
 
-Security benefits:
+## ⚙️ Installation
 
-Ensures message confidentiality
+### 1. Prerequisites
 
-Prevents unauthorized access
+- Python 3.7 or higher — [Download here](https://www.python.org/downloads/)
 
-Protects communication from network sniffing
+### 2. Install Required Library
 
-Future Improvements
+```bash
+pip install cryptography
+```
 
-Possible improvements include:
+---
 
-User authentication system
+## 🚀 Running the Application
 
-End-to-end encryption
+### Step 1 — Start the Server
 
-File sharing support
+```bash
+python server.py
+```
 
-Group chat functionality
+The server will begin listening for incoming client connections.
 
-Dark mode interface
+### Step 2 — Start a Client
 
-Database for message history
+Open a **new terminal** and run:
 
-Deployment on cloud server
+```bash
+python client.py
+```
 
-Learning Outcomes
+Repeat this step in additional terminals to simulate multiple users.
 
-This project helps understand:
+---
 
-Socket programming in Python
+## 🖥️ Example Output
 
-Client-server communication
+**Server terminal — encrypted message received and decrypted:**
 
-Cryptographic encryption
+```
+[*] Waiting for connections...
+[+] Client connected: ('127.0.0.1', 54321)
 
-GUI development with Tkinter
+Encrypted : b'gAAAAABl...'
+Decrypted : [14:32:10] Client: Hello Server
+```
 
-Multi-threaded applications
+---
 
-Author
+## 🔐 Security Implementation
 
-Your Name
+This project uses **Fernet encryption** from Python's `cryptography` library, which is built on top of AES-128 in CBC mode with HMAC-SHA256 for authentication.
 
-License
+**Security benefits:**
+- Ensures message **confidentiality** — data is unreadable in transit
+- Provides **integrity checking** — tampered messages are rejected
+- Protects against **network sniffing and packet capture**
+- Uses a **shared symmetric key** for encryption and decryption
 
-This project is for educational purposes and can be freely modified and used for learning.
+> ⚠️ **Note:** This project uses a pre-shared symmetric key for simplicity. For production use, consider asymmetric key exchange (e.g., Diffie-Hellman) to establish the key securely.
+
+---
+
+## 🔮 Future Improvements
+
+- [ ] User authentication (username + password)
+- [ ] End-to-end encryption with asymmetric key exchange
+- [ ] File and image sharing support
+- [ ] Group chat / channel support
+- [ ] Dark mode GUI theme
+- [ ] Persistent message history with database integration
+- [ ] Cloud deployment (AWS / DigitalOcean)
+
+---
+
+## 📚 Learning Outcomes
+
+Working on this project helps you understand:
+
+- TCP socket programming in Python
+- Client-server communication architecture
+- Symmetric cryptographic encryption (AES/Fernet)
+- GUI development with Tkinter
+- Multi-threaded server design
+
+---
+
+
+
+---
+
+## 📄 License
+
+This project is intended for **educational purposes**. Feel free to use, modify, and build upon it for learning and non-commercial applications.
